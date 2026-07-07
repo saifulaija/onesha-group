@@ -1,4 +1,5 @@
 
+
 import { motion } from "framer-motion";
 import { Bar } from "react-chartjs-2";
 import {
@@ -11,19 +12,6 @@ import {
 } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
-
-/**
- * Economics
- * Replicates the original dark "fin-strip" / Unit Economics band — 4 cost
- * cells + a break-even bar chart.
- *
- * Requires: npm install chart.js react-chartjs-2
- * Fonts required globally: 'Fraunces', Inter, 'JetBrains Mono'
- *
- * Top padding follows the same reduced-gap scale used on the sections
- * above it, so the rhythm stays consistent even though this band switches
- * to a dark background.
- */
 
 const finCells = [
   { label: "SOURCING COST / CONTAINER", value: "¥1.8M" },
@@ -90,10 +78,78 @@ const chartReveal = {
   },
 };
 
+/* ---------- infinity signature motif (dark-theme) ---------- */
+const InfinitySignature = () => (
+  <motion.svg
+    className="pointer-events-none absolute left-1/2 top-0 w-[560px] -translate-x-1/2 opacity-[0.09] md:w-[820px]"
+    viewBox="0 0 900 260"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    animate={{ rotate: [0, 1.5, 0, -1.5, 0] }}
+    transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+  >
+    <defs>
+      <linearGradient
+        id="infGradEcon"
+        x1="200"
+        y1="130"
+        x2="700"
+        y2="130"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0%" stopColor="#f2c879" stopOpacity="0" />
+        <stop offset="50%" stopColor="#f2c879" stopOpacity="1" />
+        <stop offset="100%" stopColor="#f2c879" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M200 130C200 78 256 78 312 130C368 182 424 182 480 130C536 78 592 78 648 130C680 158 700 130 700 130"
+      stroke="url(#infGradEcon)"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M200 130C200 182 256 182 312 130C368 78 424 78 480 130C536 182 592 182 648 130"
+      stroke="url(#infGradEcon)"
+      strokeWidth="1.5"
+    />
+  </motion.svg>
+);
+
 const Economics = () => {
   return (
-    <section className="relative bg-[#0b1d33] pb-16 pt-8 text-white sm:pb-20 sm:pt-10 md:pt-14 lg:pb-24 lg:pt-16">
-      <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
+    <section className="relative overflow-hidden bg-[#0b1d33] pb-16 pt-8 text-white sm:pb-20 sm:pt-10 md:pt-14 lg:pb-24 lg:pt-16">
+      {/* ---------- premium background layers ---------- */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.5]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)",
+          backgroundSize: "34px 34px",
+          maskImage:
+            "radial-gradient(ellipse 75% 70% at 50% 30%, black 30%, transparent 85%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 75% 70% at 50% 30%, black 30%, transparent 85%)",
+        }}
+      />
+      <div className="pointer-events-none absolute -left-40 top-0 h-[420px] w-[420px] rounded-full bg-[#f2c879]/[0.08] blur-[150px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-[380px] w-[380px] rounded-full bg-[#345d8a]/[0.18] blur-[140px]" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(242,200,121,0.5), transparent)",
+        }}
+      />
+      <InfinitySignature />
+
+      <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8">
         {/* ---------- Head ---------- */}
         <div className="mb-10 max-w-[640px] sm:mb-12">
           <motion.span
@@ -168,7 +224,7 @@ const Economics = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="border border-white/10 bg-white/[0.04] p-6 sm:p-8"
+          className="relative border border-white/10 bg-white/[0.04] p-6 backdrop-blur-[2px] sm:p-8"
         >
           <h3 className="mb-1 text-[16px] text-white">
             Break-even volume, Year 1

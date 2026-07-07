@@ -360,7 +360,7 @@ const Navbar = () => {
                 className="text-[11px] tracking-[0.04em] text-[#345d8a]"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
-                STRATEGY / CATEGORY 02
+              OVERVIEW · FY2026
               </div>
             </div>
           </a>
