@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
+@import "tailwindcss";
+*{
+   font-family: "Fraunces", serif;
+   font-weight: 500;
+}
+
+
+
+@theme {
+
+  /* =========================
+     Brand Colors
+  ========================== */
+
+  --color-primary: #0F172A;
+  --color-primary-light: #1E293B;
+  --color-primary-dark: #020617;
+
+  --color-secondary: #C9A14A;
+  --color-secondary-light: #E8C66A;
+  --color-secondary-dark: #A27C28;
+
+  --color-accent: #2563EB;
+  --color-accent-light: #3B82F6;
+
+  /* =========================
+      Background
+  ========================== */
+
+  --color-white: #FFFFFF;
+  --color-body: #FAFAFA;
+  --color-section: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-dark: #0B1120;
+
+  /* =========================
+      Text
+  ========================== */
+
+  --color-heading: #111827;
+  --color-text: #475569;
+  --color-muted: #94A3B8;
+  --color-white-text: #FFFFFF;
+
+  /* =========================
+      Border
+  ========================== */
+
+  --color-border: #E5E7EB;
+  --color-border-dark: #CBD5E1;
+
+  /* =========================
+      Status
+  ========================== */
+
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+
+  /* =========================
+      Radius
+  ========================== */
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-full: 999px;
+
+  /* =========================
+      Shadow
+  ========================== */
+
+  --shadow-sm: 0 4px 10px rgba(15,23,42,.05);
+
+  --shadow-md: 0 10px 30px rgba(15,23,42,.08);
+
+  --shadow-lg: 0 20px 60px rgba(15,23,42,.12);
+
+  --shadow-xl: 0 30px 80px rgba(15,23,42,.18);
+
+  /* =========================
+      Container
+  ========================== */
+
+  --container: 1320px;
+
+  /* =========================
+      Fonts
+  ========================== */
+
+  --font-heading: "Fraunces", serif;
+  --font-body: "Manrope", sans-serif;
+
+  /* =========================
+      Transition
+  ========================== */
+
+  --transition: .35s ease;
+}
