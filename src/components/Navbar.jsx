@@ -46,36 +46,81 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleLinkClick = (e, href) => {
+  // const handleLinkClick = (e, href) => {
+  //   setOpen(false);
+
+  //   // Plain route link (e.g. Home "/") — let it navigate normally
+  //   if (!href.startsWith("#")) {
+  //     setActive(href);
+  //     return;
+  //   }
+
+  //   // Section link
+  //   setActive(href);
+  //   const onHomePage = window.location.pathname === "/";
+
+  //   if (!onHomePage) {
+  //     // Navigate to home page with the target hash; browser will
+  //     // load "/" then jump to the section once it's rendered
+  //     e.preventDefault();
+  //     window.location.href = "/" + href;
+  //     return;
+  //   }
+
+  //   // Already on home page — smooth scroll without a hard reload
+  //   e.preventDefault();
+  //   const el = document.querySelector(href);
+  //   if (el) {
+  //     el.scrollIntoView({ behavior: "smooth", block: "start" });
+  //     window.history.pushState(null, "", href);
+  //   }
+  // };
+const handleLinkClick = (e, href) => {
+  // Home or Contact page
+  if (!href.startsWith("#")) {
     setOpen(false);
-
-    // Plain route link (e.g. Home "/") — let it navigate normally
-    if (!href.startsWith("#")) {
-      setActive(href);
-      return;
-    }
-
-    // Section link
     setActive(href);
-    const onHomePage = window.location.pathname === "/";
+    return;
+  }
 
-    if (!onHomePage) {
-      // Navigate to home page with the target hash; browser will
-      // load "/" then jump to the section once it's rendered
-      e.preventDefault();
-      window.location.href = "/" + href;
-      return;
-    }
+  e.preventDefault();
+  setActive(href);
 
-    // Already on home page — smooth scroll without a hard reload
-    e.preventDefault();
+  // If not on home page
+  if (window.location.pathname !== "/") {
+    window.location.href = "/" + href;
+    return;
+  }
+
+  const scrollToSection = () => {
     const el = document.querySelector(href);
+
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState(null, "", href);
+      const navbar = document.querySelector("header");
+      const offset = navbar ? navbar.offsetHeight : 80;
+
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top,
+        behavior: "smooth",
+      });
+
+      window.history.replaceState(null, "", href);
     }
   };
 
+  // Mobile
+  if (window.innerWidth < 721) {
+    setOpen(false);
+
+    setTimeout(() => {
+      requestAnimationFrame(scrollToSection);
+    }, 280); // wait for menu closing animation
+  } else {
+    scrollToSection();
+  }
+};
   return (
     <motion.header
       initial={false}
