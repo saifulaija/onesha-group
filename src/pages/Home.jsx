@@ -8,11 +8,13 @@ import Risks from "../components/Risks";
 import Infrastructure from "../components/Infrastructure";
 import History from "../components/History";
 import Services from "../components/Services";
+import About from "../components/About";
 
 const Home = () => {
   return (
     <>
       <Hero />
+      <About/>
       <Thesis />
       <Market />
       <Services/>
