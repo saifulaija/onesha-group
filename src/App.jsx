@@ -34,6 +34,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import { Contact } from "./pages/Contact";
 import Preloader from "./components/Preloader";
+import About from "./pages/About";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "about",
+        element: <About/>,
       },
     ],
   },
