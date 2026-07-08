@@ -1,140 +1,114 @@
 // import { motion } from "framer-motion";
 
+// const fadeUp = {
+//   hidden: { opacity: 0, y: 16 },
+//   show: (i = 0) => ({
+//     opacity: 1,
+//     y: 0,
+//     transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 },
+//   }),
+// };
+
 // const CMap = () => {
 //   return (
-//     <section className="relative overflow-hidden border-t border-[rgba(11,29,51,0.14)] bg-[#eef1f4] py-16 sm:py-20 lg:py-24">
-//       {/* subtle dot texture */}
-//       <div
-//         className="pointer-events-none absolute inset-0 opacity-[0.5]"
-//         style={{
-//           backgroundImage:
-//             "radial-gradient(rgba(11,29,51,0.06) 1px, transparent 1px)",
-//           backgroundSize: "24px 24px",
-//         }}
-//       />
-
-//       <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8">
-//         {/* ---------- Head ---------- */}
+//     <section className=" bg-[#EEF1F6] py-16 sm:py-20 md:py-[80px]">
+//       <div className="mx-auto max-w-[1320px] px-6 sm:px-8">
+//         {/* Head */}
 //         <motion.div
-//           initial={{ opacity: 0, y: 22 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true, amount: 0.6 }}
-//           transition={{ duration: 0.6, ease: "easeOut" }}
-//           className="mb-12 max-w-[640px] sm:mb-14"
+//           initial="hidden"
+//           whileInView="show"
+//           viewport={{ once: true, amount: 0.8 }}
+//           variants={fadeUp}
+//           custom={0}
+//           className="mb-3.5 flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.16em] text-[#5C6577] before:block before:h-2 before:w-2 before:flex-shrink-0 before:bg-[#B85C38]"
 //         >
-//           <span
-//             className="mb-3.5 flex items-center gap-2 text-[11.5px] uppercase tracking-[0.14em] text-[#d98e2b]"
-//             style={{ fontFamily: "'JetBrains Mono', monospace" }}
-//           >
-//             <span className="h-[7px] w-[7px] flex-shrink-0 bg-[#d98e2b]" />
-//             Our Location
-//           </span>
-//           <h2
-//             className="text-[clamp(26px,3.6vw,42px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#0b1d33]"
-//             style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-//           >
-//             Find us in Japan.
-//           </h2>
-//           <p className="mt-4 max-w-[540px] text-[15px] leading-relaxed text-[#345d8a]">
-//             Strategically positioned to support businesses across Japan through
-//             innovation, excellence, and long-term partnerships.
-//           </p>
+//           Location
 //         </motion.div>
 
-//         {/* ---------- Map + Info panel ---------- */}
-//         <motion.div
-//           initial={{ opacity: 0, y: 30 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true, amount: 0.15 }}
-//           transition={{ duration: 0.7, ease: "easeOut" }}
-//           className="grid grid-cols-1 border border-[rgba(11,29,51,0.14)] bg-white lg:grid-cols-[1fr_360px]"
+//         <motion.h2
+//           initial="hidden"
+//           whileInView="show"
+//           viewport={{ once: true, amount: 0.6 }}
+//           variants={fadeUp}
+//           custom={1}
+//           className="max-w-[560px] font-semibold tracking-[-0.01em] text-[#16203A]"
+//           style={{
+//             fontFamily: "'Fraunces',serif",
+//             fontSize: "clamp(24px,3vw,34px)",
+//             lineHeight: 1.15,
+//           }}
 //         >
-//           {/* Map */}
-//           <div className="relative order-1 h-[320px] sm:h-[420px] lg:order-1 lg:h-auto lg:min-h-[460px]">
+//           Rooted in Tokyo.
+//         </motion.h2>
+
+//         <motion.p
+//           initial="hidden"
+//           whileInView="show"
+//           viewport={{ once: true, amount: 0.8 }}
+//           variants={fadeUp}
+//           custom={2}
+//           className="mt-3 max-w-[520px] text-[15px] text-[#5C6577]"
+//         >
+//           Our Japan desk sits at the head of the corridor — sourcing,
+//           partnerships, and group strategy run from here.
+//         </motion.p>
+
+//         {/* Map card */}
+//         <motion.div
+//           initial="hidden"
+//           whileInView="show"
+//           viewport={{ once: true, amount: 0.2 }}
+//           variants={fadeUp}
+//           custom={3}
+//           className="relative mt-9 overflow-hidden rounded-[6px] border border-[rgba(22,32,58,0.12)] bg-white shadow-[0_20px_50px_-24px_rgba(14,22,38,0.25)] sm:mt-11"
+//         >
+//           <div className="relative h-[320px] w-full sm:h-[400px] md:h-[460px]">
 //             <iframe
-//               title="Japan Map"
-//               src="https://maps.google.com/maps?q=Japan&t=&z=5&ie=UTF8&iwloc=&output=embed"
+//               title="Onesha Group — Tokyo, Japan office location"
+//               src="https://www.google.com/maps?q=Tokyo,Japan&output=embed"
+//               className="absolute inset-0 h-full w-full grayscale-[35%] contrast-[1.02] saturate-[0.9]"
+//               style={{ border: 0 }}
 //               loading="lazy"
-//               allowFullScreen
-//               className="absolute inset-0 h-full w-full"
-//               style={{
-//                 border: 0,
-//                 filter: "grayscale(45%) contrast(108%) saturate(75%)",
-//               }}
+//               referrerPolicy="no-referrer-when-downgrade"
 //             />
-//             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1d33]/10 via-transparent to-transparent" />
+//             <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(22,32,58,0.06)]" />
 //           </div>
 
-//           {/* Info panel — dark, flat, editorial */}
-//           <div className="relative order-2 flex flex-col justify-between border-t border-[rgba(11,29,51,0.14)] bg-[#0b1d33] p-8 text-white sm:p-9 lg:order-2 lg:border-l lg:border-t-0">
-//             <div
-//               className="pointer-events-none absolute inset-0 opacity-[0.05]"
-//               style={{
-//                 backgroundImage:
-//                   "linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px)",
-//                 backgroundSize: "28px 28px",
-//               }}
-//             />
-
-//             <div className="relative">
-//               {/* Brand */}
-//               <div className="flex items-baseline gap-3 border-b border-white/10 pb-6">
-//                 <div
-//                   className="flex h-[34px] w-[34px] flex-shrink-0 items-center justify-center bg-[#f2c879] text-[16px] font-semibold text-[#0b1d33]"
-//                   style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-//                 >
-//                   O
-//                 </div>
-//                 <div>
-//                   <h3 className="text-[15px] font-bold tracking-[0.01em] text-white">
-//                     ONESHA GROUP
-//                   </h3>
-//                   <p
-//                     className="text-[10.5px] tracking-[0.06em] text-white/50"
-//                     style={{ fontFamily: "'JetBrains Mono', monospace" }}
-//                   >
-//                     STRATEGY / CATEGORY 02
-//                   </p>
-//                 </div>
-//               </div>
-
-//               {/* Details */}
-//               <div className="mt-7 space-y-6">
-//                 <div>
-//                   <span
-//                     className="block text-[10px] uppercase tracking-[0.14em] text-[#f2c879]"
-//                     style={{ fontFamily: "'JetBrains Mono', monospace" }}
-//                   >
-//                     Head Office
-//                   </span>
-//                   <p className="mt-1.5 text-[14.5px] leading-relaxed text-white/75">
-//                     Tokyo, Japan
-//                   </p>
-//                 </div>
-//                 <div>
-//                   <span
-//                     className="block text-[10px] uppercase tracking-[0.14em] text-[#f2c879]"
-//                     style={{ fontFamily: "'JetBrains Mono', monospace" }}
-//                   >
-//                     Email
-//                   </span>
-//                   <p className="mt-1.5 text-[14.5px] leading-relaxed text-white/75">
-//                     contact@oneshagroup.com
-//                   </p>
-//                 </div>
-//               </div>
+//           {/* Info overlay — right side on desktop */}
+//           <div className="relative border-t border-[rgba(22,32,58,0.12)] bg-white p-5 sm:absolute sm:right-5 sm:top-5 sm:w-[260px] sm:rounded-[4px] sm:border sm:p-5 sm:shadow-[0_16px_40px_-16px_rgba(14,22,38,0.35)]">
+//             <div className="mb-1 flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.1em] text-[#8A6C42]">
+//               <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#C79A5B]" />
+//               Japan HQ
 //             </div>
-
+//             <div
+//               className="text-[16px] font-semibold text-[#16203A]"
+//               style={{ fontFamily: "'Fraunces',serif" }}
+//             >
+//               Tokyo, Japan
+//             </div>
+//             <p className="mt-2 text-[12.5px] leading-relaxed text-[#5C6577]">
+//               Head office for sourcing, group strategy, and the
+//               Japan&ndash;Bangladesh corridor.
+//             </p>
 //             <a
-//               href="https://maps.google.com/?q=Japan"
+//               href="https://www.google.com/maps?q=Tokyo,Japan"
 //               target="_blank"
-//               rel="noopener noreferrer"
-//               className="group relative mt-9 inline-flex w-full items-center justify-between gap-3 border border-[#f2c879]/40 px-5 py-3.5 text-[13px] font-semibold text-[#f2c879] transition-colors duration-300 hover:bg-[#f2c879] hover:text-[#0b1d33]"
+//               rel="noreferrer"
+//               className="mt-4 inline-flex items-center gap-1.5 font-mono text-[11.5px] font-medium text-[#16203A] transition-colors duration-150 hover:text-[#8A6C42]"
 //             >
 //               Open in Google Maps
-//               <span className="transition-transform duration-300 group-hover:translate-x-1">
-//                 →
-//               </span>
+//               <svg
+//                 className="h-3 w-3"
+//                 viewBox="0 0 24 24"
+//                 fill="none"
+//                 stroke="currentColor"
+//                 strokeWidth="2.25"
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//               >
+//                 <line x1="5" y1="12" x2="19" y2="12" />
+//                 <polyline points="12 5 19 12 12 19" />
+//               </svg>
 //             </a>
 //           </div>
 //         </motion.div>
@@ -144,254 +118,118 @@
 // };
 
 // export default CMap;
-
 import { motion } from "framer-motion";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 },
+  }),
+};
 
 const CMap = () => {
   return (
-    <section className="relative overflow-hidden border-t border-[rgba(11,29,51,0.14)] bg-[#eef1f4] py-16 sm:py-20 lg:py-24">
-      {/* subtle dot texture */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.5]"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(11,29,51,0.06) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-[1320px] px-5 sm:px-8">
-        {/* ---------- Head ---------- */}
+    <section className="bg-[#EEF1F6] pb-16 pt-8 sm:pb-20 sm:pt-8 md:pb-[80px] md:pt-10">
+      <div className="mx-auto max-w-[1320px] px-6 sm:px-8">
+        {/* Head */}
         <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-12 max-w-[640px] sm:mb-14"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.8 }}
+          variants={fadeUp}
+          custom={0}
+          className="mb-3.5 flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.16em] text-[#5C6577] before:block before:h-2 before:w-2 before:flex-shrink-0 before:bg-[#B85C38]"
         >
-          <span
-            className="mb-3.5 flex items-center gap-2 text-[11.5px] uppercase tracking-[0.14em] text-[#d98e2b]"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            <span className="h-[7px] w-[7px] flex-shrink-0 bg-[#d98e2b]" />
-            Our Location
-          </span>
-          <h2
-            className="text-[clamp(26px,3.6vw,42px)] font-semibold leading-[1.1] tracking-[-0.01em] text-[#0b1d33]"
-            style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-          >
-            Find us in Japan.
-          </h2>
-          <p className="mt-4 max-w-[540px] text-[15px] leading-relaxed text-[#345d8a]">
-            Strategically positioned to support businesses across Japan through
-            innovation, excellence, and long-term partnerships.
-          </p>
+          Location
         </motion.div>
 
-        {/* ---------- Map + Info panel ---------- */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="grid grid-cols-1 border border-[rgba(11,29,51,0.14)] bg-white lg:grid-cols-[1fr_360px]"
+        <motion.h2
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.6 }}
+          variants={fadeUp}
+          custom={1}
+          className="max-w-[560px] font-semibold tracking-[-0.01em] text-[#16203A]"
+          style={{
+            fontFamily: "'Fraunces',serif",
+            fontSize: "clamp(24px,3vw,34px)",
+            lineHeight: 1.15,
+          }}
         >
-          {/* Map */}
-          <div className="relative order-1 h-[320px] sm:h-[420px] lg:order-1 lg:h-auto lg:min-h-[460px]">
+          Rooted in Tokyo.
+        </motion.h2>
+
+        <motion.p
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.8 }}
+          variants={fadeUp}
+          custom={2}
+          className="mt-3 max-w-[520px] text-[15px] text-[#5C6577]"
+        >
+          Our Japan desk sits at the head of the corridor — sourcing,
+          partnerships, and group strategy run from here.
+        </motion.p>
+
+        {/* Map card */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={fadeUp}
+          custom={3}
+          className="relative mt-9 overflow-hidden rounded-[6px] border border-[rgba(22,32,58,0.12)] bg-white shadow-[0_20px_50px_-24px_rgba(14,22,38,0.25)] sm:mt-11"
+        >
+          <div className="relative h-[320px] w-full sm:h-[400px] md:h-[460px]">
             <iframe
-              title="Japan Map"
-              src="https://maps.google.com/maps?q=Japan&t=&z=5&ie=UTF8&iwloc=&output=embed"
+              title="Onesha Group — Tokyo, Japan office location"
+              src="https://www.google.com/maps?q=Tokyo,Japan&output=embed"
+              className="absolute inset-0 h-full w-full grayscale-[35%] contrast-[1.02] saturate-[0.9]"
+              style={{ border: 0 }}
               loading="lazy"
-              allowFullScreen
-              className="absolute inset-0 h-full w-full"
-              style={{
-                border: 0,
-                filter: "grayscale(45%) contrast(108%) saturate(75%)",
-              }}
+              referrerPolicy="no-referrer-when-downgrade"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1d33]/10 via-transparent to-transparent" />
+            <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(22,32,58,0.06)]" />
           </div>
 
-          {/* Info panel — dark, flat, editorial */}
-          <div className="relative order-2 flex flex-col justify-between border-t border-[rgba(11,29,51,0.14)] bg-[#0b1d33] p-8 text-white sm:p-9 lg:order-2 lg:border-l lg:border-t-0">
-            <div
-              className="pointer-events-none absolute inset-0 opacity-[0.05]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px)",
-                backgroundSize: "28px 28px",
-              }}
-            />
-
-            <div className="relative">
-              {/* Brand */}
-              <div className="flex items-baseline gap-3 border-b border-white/10 pb-6">
-                <div
-                  className="flex h-[34px] w-[34px] flex-shrink-0 items-center justify-center bg-[#f2c879] text-[16px] font-semibold text-[#0b1d33]"
-                  style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-                >
-                  O
-                </div>
-                <div>
-                  <h3 className="text-[15px] font-bold tracking-[0.01em] text-white">
-                    ONESHA GROUP
-                  </h3>
-                  <p
-                    className="text-[10.5px] tracking-[0.06em] text-white/50"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    STRATEGY / CATEGORY 02
-                  </p>
-                </div>
-              </div>
-
-              {/* Details */}
-              <div className="mt-7 space-y-6">
-                <div>
-                  <span
-                    className="block text-[10px] uppercase tracking-[0.14em] text-[#f2c879]"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    Head Office
-                  </span>
-                  <p className="mt-1.5 text-[14.5px] leading-relaxed text-white/75">
-                    Tokyo, Japan
-                  </p>
-                </div>
-                <div>
-                  <span
-                    className="block text-[10px] uppercase tracking-[0.14em] text-[#f2c879]"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    Email
-                  </span>
-                  <p className="mt-1.5 text-[14.5px] leading-relaxed text-white/75">
-                    hello@oneshagroup.com
-                  </p>
-                </div>
-              </div>
+          {/* Info overlay — right side on desktop */}
+          <div className="relative border-t border-[rgba(22,32,58,0.12)] bg-white p-5 sm:absolute sm:right-5 sm:top-5 sm:w-[260px] sm:rounded-[4px] sm:border sm:p-5 sm:shadow-[0_16px_40px_-16px_rgba(14,22,38,0.35)]">
+            <div className="mb-1 flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.1em] text-[#8A6C42]">
+              <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#C79A5B]" />
+              Japan HQ
             </div>
-
+            <div
+              className="text-[16px] font-semibold text-[#16203A]"
+              style={{ fontFamily: "'Fraunces',serif" }}
+            >
+              Tokyo, Japan
+            </div>
+            <p className="mt-2 text-[12.5px] leading-relaxed text-[#5C6577]">
+              Head office for sourcing, group strategy, and the
+              Japan&ndash;Bangladesh corridor.
+            </p>
             <a
-              href="https://maps.google.com/?q=Japan"
+              href="https://www.google.com/maps?q=Tokyo,Japan"
               target="_blank"
-              rel="noopener noreferrer"
-              className="group relative mt-9 inline-flex w-full items-center justify-between gap-3 border border-[#f2c879]/40 px-5 py-3.5 text-[13px] font-semibold text-[#f2c879] transition-colors duration-300 hover:bg-[#f2c879] hover:text-[#0b1d33]"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-1.5 font-mono text-[11.5px] font-medium text-[#16203A] transition-colors duration-150 hover:text-[#8A6C42]"
             >
               Open in Google Maps
-              <span className="transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </a>
-          </div>
-        </motion.div>
-
-        {/* ---------- Direct details strip ---------- */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          className="mt-px"
-        >
-          <span
-            className="mb-3 block text-[10.5px] uppercase tracking-[0.14em] text-[#345d8a]"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            Direct Details
-          </span>
-
-          <div className="grid grid-cols-1 gap-px border border-[rgba(11,29,51,0.14)] bg-[rgba(11,29,51,0.14)] sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                label: "Email",
-                value: "hello@oneshagroup.com",
-                href: "mailto:hello@oneshagroup.com",
-              },
-              {
-                label: "Phone",
-                value: "+880 00 000000",
-                href: "tel:+8800000000",
-              },
-              { label: "Location", value: "Tokyo, Japan" },
-              { label: "Hours", value: "Sun – Thu, 10:00–18:00 (GMT+6)" },
-            ].map((item) => (
-              <div key={item.label} className="bg-white p-6">
-                <span
-                  className="block text-[10px] uppercase tracking-[0.12em] text-[#d98e2b]"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                >
-                  {item.label}
-                </span>
-                {item.href ? (
-                  <a
-                    href={item.href}
-                    className="mt-2 block text-[14px] leading-relaxed text-[#0b1d33] transition-colors hover:text-[#d98e2b]"
-                  >
-                    {item.value}
-                  </a>
-                ) : (
-                  <p className="mt-2 text-[14px] leading-relaxed text-[#0b1d33]">
-                    {item.value}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* ---------- By vertical ---------- */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="mt-8"
-        >
-          <span
-            className="mb-3 block text-[10.5px] uppercase tracking-[0.14em] text-[#345d8a]"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            By Vertical
-          </span>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            {[
-              {
-                name: "Onesha Motors",
-                email: "motors@oneshagroup.com",
-                accent: "#B85C38",
-              },
-              {
-                name: "Onesha Tech",
-                email: "tech@oneshagroup.com",
-                accent: "#3E9280",
-              },
-              {
-                name: "Onesha Textile",
-                email: "textile@oneshagroup.com",
-                accent: "#5A67A6",
-              },
-            ].map((v) => (
-              <a
-                key={v.name}
-                href={`mailto:${v.email}`}
-                className="group flex items-center gap-3 border border-[rgba(11,29,51,0.14)] bg-white px-5 py-3.5 transition-colors duration-300 hover:border-[rgba(11,29,51,0.3)] sm:flex-1"
+              <svg
+                className="h-3 w-3"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.25"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <span
-                  className="h-[7px] w-[7px] flex-shrink-0"
-                  style={{ background: v.accent }}
-                />
-                <span className="text-[13.5px] font-semibold text-[#0b1d33]">
-                  {v.name}
-                </span>
-                <span
-                  className="ml-auto text-[12px] text-[#345d8a] transition-colors group-hover:text-[#d98e2b]"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                >
-                  {v.email}
-                </span>
-              </a>
-            ))}
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
           </div>
         </motion.div>
       </div>
