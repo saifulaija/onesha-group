@@ -1120,7 +1120,7 @@ const About = () => {
             custom={3}
           >
             <motion.a
-              href="#"
+              href="/contact"
               whileHover="hover"
               whileTap={{ scale: 0.96 }}
               className="group relative flex w-fit items-center gap-2 overflow-hidden rounded-full border border-[#0b1d33] bg-[#0b1d33] px-6 py-3 text-[13px] font-semibold text-[#f2c879] shadow-[0_6px_18px_-8px_rgba(11,29,51,0.5)] transition-shadow duration-300 hover:shadow-[0_10px_26px_-8px_rgba(11,29,51,0.55)] sm:px-7 sm:py-3.5 sm:text-[13.5px]"

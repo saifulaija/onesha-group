@@ -539,7 +539,7 @@ const Services = () => {
             className="shrink-0"
           >
             <a
-              href="#contact"
+              href="/contact"
               className="group/cta relative inline-flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full bg-[#12203A] px-6 py-3.5 text-[13.5px] font-medium text-white transition-transform duration-300 ease-out hover:-translate-y-0.5"
             >
               <span className="absolute inset-0 left-0 -z-10 w-0 bg-[#B8874F] transition-all duration-500 ease-out group-hover/cta:w-full" />
