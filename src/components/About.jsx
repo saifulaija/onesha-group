@@ -884,7 +884,10 @@ const VerticalBadge = () => {
 
 const About = () => {
   return (
-    <section className="relative overflow-hidden bg-[#EEF1F4] py-16 text-[#12203A] sm:py-20 md:py-24 lg:py-28">
+    <section
+      id="about"
+      className="relative overflow-hidden bg-[#EEF1F4] py-16 text-[#12203A] sm:py-20 md:py-24 lg:py-28"
+    >
       <style>{`@keyframes oneshaSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
 
       {/* ---------- premium background layers ---------- */}

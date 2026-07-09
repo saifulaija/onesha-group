@@ -136,7 +136,10 @@ const CategoryBlock = ({ category, index }) => (
 
 const Thesis = () => {
   return (
-    <section className="relative overflow-hidden bg-white py-16 text-[#12203A] sm:py-20 md:py-24 lg:py-28">
+    <section
+      id="thesis"
+      className="relative overflow-hidden bg-white py-16 text-[#12203A] sm:py-20 md:py-24 lg:py-28"
+    >
       {/* ---------- subtle premium background texture, matching site language ---------- */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.55]"
