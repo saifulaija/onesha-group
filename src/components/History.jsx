@@ -1,61 +1,10 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 
-/**
- * History
- * A record of the group's founding sequence, styled after the "ledger" or
- * annual-report timeline convention rather than the alternating-zigzag
- * timeline trope — a better fit for a holding group with a small, ordered
- * set of milestones. Uses the same design system as the rest of the site
- * (navy/steel/amber/paper palette, Fraunces / Inter / JetBrains Mono type
- * stack, hairline borders, mono kickers).
- *
- * Signature element: a fixed left ledger column (large serif year + a
- * REC.0N filing code) paired to a content column, with a spine that fills
- * with an amber "ink" line as the reader scrolls — the read progress
- * doubles as the record being completed in real time.
- *
- * Layout:
- * - Desktop (md+): two-column grid per row — label column (year + record
- *   code) fixed-width on the left, content on the right. Single spine runs
- *   down the boundary between the two columns.
- * - Mobile: label collapses to an inline row above the content (year set
- *   smaller), spine moves flush left. Nothing overlaps or crowds.
- *
- * Fonts required globally: 'Fraunces', Inter, 'JetBrains Mono'
- */
-
-const milestones = [
-  {
-    code: "REC.01",
-    year: "[Year]",
-    title: "Onesha Motors opens its first showroom",
-    tag: "Mobility",
-    desc: "The group's founding business begins buying and reselling reconditioned vehicles in Dhaka, built on inspection-backed trust rather than volume.",
-  },
-  {
-    code: "REC.02",
-    year: "[Year]",
-    title: "Onesha Tech is formed",
-    tag: "Technology",
-    desc: "A small delivery team starts building websites and software for clients abroad, later expanding into AI-driven automation.",
-  },
-  {
-    code: "REC.03",
-    year: "[Year]",
-    title: "ONESHA GROUP is formally established",
-    tag: "Group",
-    desc: "The two businesses are brought under one holding structure, with shared capital allocation and reporting discipline.",
-  },
-  {
-    code: "REC.04",
-    year: "[Year]",
-    title: "Onesha Textile enters garment export",
-    tag: "Textile",
-    desc: "The group adds its third vertical, moving into knit and woven garment production for export markets.",
-  },
-];
-
+/* ------------------------------------------------------------------ */
+/*  Motion presets — consistent with site family                       */
+/* ------------------------------------------------------------------ */
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
   show: (i = 0) => ({
@@ -65,167 +14,321 @@ const fadeUp = {
   }),
 };
 
-const rowReveal = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: "easeOut" },
+/* ------------------------------------------------------------------ */
+/*  Content — four entries, kept in order. Fill in real years.         */
+/* ------------------------------------------------------------------ */
+const TIMELINE = [
+  {
+    idx: 0,
+    rec: "REC.01",
+    year: "[Year]",
+    tag: "Mobility",
+    color: "#B8874F",
+    title: "Onesha Motors opens its first showroom",
+    description:
+      "The group's founding business begins buying and reselling reconditioned vehicles in Dhaka, built on inspection-backed trust rather than volume.",
+    origin: true,
+    nodeType: "check",
   },
+  {
+    idx: 1,
+    rec: "REC.02",
+    year: "[Year]",
+    tag: "Technology",
+    color: "#5A7BA6",
+    title: "Onesha Tech is formed",
+    description:
+      "A small delivery team starts building websites and software for clients abroad, later expanding into AI-driven automation.",
+    origin: false,
+    nodeType: "check",
+  },
+  {
+    idx: 2,
+    rec: "REC.03",
+    year: "[Year]",
+    tag: "Group",
+    color: "#B8874F",
+    title: "ONESHA GROUP is formally established",
+    description:
+      "The two businesses are brought under one holding structure, with shared capital allocation and reporting discipline.",
+    origin: false,
+    nodeType: "group",
+  },
+  {
+    idx: 3,
+    rec: "REC.04",
+    year: "[Year]",
+    tag: "Textile",
+    color: "#8C6A2F",
+    title: "Onesha Textile enters garment export",
+    description:
+      "The group adds its third vertical, moving into knit and woven garment production for export markets.",
+    origin: false,
+    nodeType: "check",
+  },
+];
+
+/* ---------- one timeline row ---------- */
+const TimelineRow = ({ item, isLast, revealed, rowRef }) => {
+  const isGroup = item.nodeType === "group";
+
+  return (
+    <div
+      ref={rowRef}
+      data-idx={item.idx}
+      className={`grid grid-cols-[56px_22px_1fr] gap-x-4 py-6 sm:grid-cols-[84px_26px_1fr] sm:gap-x-6 sm:py-[30px] ${
+        !isLast ? "border-b border-[#EDEEF1]" : ""
+      } ${item.idx === 0 ? "pt-0" : ""}`}
+    >
+      {/* rec + year */}
+      <div className="pt-0.5">
+        <p
+          className="mb-1.5 text-[10px] tracking-[0.12em] text-[#B9C2CC] sm:mb-2 sm:text-[11px]"
+          style={{ fontFamily: "'JetBrains Mono', monospace" }}
+        >
+          {item.rec}
+        </p>
+        <p
+          className="text-[20px] text-[#12203A] sm:text-[26px]"
+          style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+        >
+          {item.year}
+        </p>
+      </div>
+
+      {/* rail: line + node */}
+      <div className="relative flex h-full justify-center">
+        <span
+          className="absolute left-1/2 top-0.5 w-[2px] -translate-x-1/2 overflow-hidden rounded-full bg-[#E3E6EA]"
+          style={{ bottom: isLast ? 0 : "-24px" }}
+        >
+          <span
+            className="absolute left-0 top-0 w-full transition-[height] duration-[900ms] ease-out"
+            style={{
+              height: revealed ? "100%" : "0%",
+              background: `linear-gradient(180deg, ${item.color}, #5A7BA6)`,
+            }}
+          />
+        </span>
+
+        {isGroup ? (
+          <span
+            className="relative z-[2] mt-0 -ml-0.5 flex h-[17px] w-[17px] items-center justify-center rounded-full p-[2px] sm:h-[18px] sm:w-[18px]"
+            style={{
+              background: `conic-gradient(${item.color}, #5A7BA6, ${item.color})`,
+            }}
+          >
+            <span
+              className="flex h-full w-full items-center justify-center rounded-full transition-colors duration-[400ms]"
+              style={{ backgroundColor: revealed ? "#12203A" : "#fff" }}
+            >
+              <Check
+                size={8}
+                strokeWidth={3}
+                className="transition-opacity duration-300"
+                style={{
+                  opacity: revealed ? 1 : 0,
+                  color: item.color,
+                }}
+              />
+            </span>
+          </span>
+        ) : (
+          <span
+            className="relative z-[2] mt-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 bg-white transition-all duration-300"
+            style={{
+              borderColor: revealed ? item.color : "#B9C2CC",
+              backgroundColor: revealed ? item.color : "#fff",
+              boxShadow: revealed ? `0 0 0 5px ${item.color}24` : "none",
+            }}
+          >
+            <Check
+              size={8}
+              strokeWidth={3}
+              className="text-white transition-opacity duration-300 delay-150"
+              style={{ opacity: revealed ? 1 : 0 }}
+            />
+          </span>
+        )}
+      </div>
+
+      {/* card */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={revealed ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={`group relative overflow-hidden rounded-xl border border-transparent px-5 py-5 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#E9EBEE] hover:bg-white hover:shadow-[0_18px_36px_-20px_rgba(18,32,58,0.25)] sm:px-6 sm:py-[22px] ${
+          item.origin ? "bg-[#F3F4F6] hover:bg-[#F3F4F6]" : ""
+        }`}
+      >
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute right-3.5 top-1.5 select-none text-[42px] leading-none opacity-[0.07] sm:right-4 sm:top-1.5 sm:text-[52px]"
+          style={{
+            fontFamily: "'Fraunces', Georgia, serif",
+            color: item.color,
+          }}
+        >
+          {item.rec.replace("REC.", "")}
+        </span>
+
+        <div className="relative mb-2.5 flex items-center gap-2 sm:mb-3">
+          <span
+            className="h-1.5 w-1.5 flex-shrink-0"
+            style={{ backgroundColor: item.color }}
+          />
+          <span
+            className="text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-[10.5px]"
+            style={{
+              color: item.color,
+              fontFamily: "'JetBrains Mono', monospace",
+            }}
+          >
+            {item.tag}
+          </span>
+        </div>
+        <h3
+          className="relative mb-2 text-[17px] leading-snug text-[#12203A] sm:text-[19px]"
+          style={{ fontFamily: "'Fraunces', Georgia, serif" }}
+        >
+          {item.title}
+        </h3>
+        <p className="relative text-[13px] leading-relaxed text-[#525C67] sm:text-[14px]">
+          {item.description}
+        </p>
+      </motion.div>
+    </div>
+  );
 };
 
-const dotReveal = {
-  hidden: { scale: 0, opacity: 0 },
-  show: {
-    scale: 1,
-    opacity: 1,
-    transition: { duration: 0.4, ease: "backOut" },
-  },
-};
-
+/* ------------------------------------------------------------------ */
+/*  Main section                                                       */
+/* ------------------------------------------------------------------ */
 const History = () => {
-  const trackRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start 0.75", "end 0.4"],
-  });
-  const spineFill = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const [revealedSet, setRevealedSet] = useState(() => new Set());
+  const [activeSpy, setActiveSpy] = useState(0);
+  const rowRefs = useRef([]);
+
+  useEffect(() => {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Number(entry.target.dataset.idx);
+            setRevealedSet((prev) => {
+              if (prev.has(idx)) return prev;
+              const next = new Set(prev);
+              next.add(idx);
+              return next;
+            });
+          }
+        });
+      },
+      { threshold: 0.4 },
+    );
+
+    const spyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSpy(Number(entry.target.dataset.idx));
+          }
+        });
+      },
+      { threshold: 0.55 },
+    );
+
+    rowRefs.current.forEach((el) => {
+      if (el) {
+        revealObserver.observe(el);
+        spyObserver.observe(el);
+      }
+    });
+
+    return () => {
+      revealObserver.disconnect();
+      spyObserver.disconnect();
+    };
+  }, []);
 
   return (
     <section
       id="history"
-      className="relative border-t border-[rgba(11,29,51,0.14)] bg-[#eef1f4] pb-16 pt-8 text-[#0b1d33] sm:pb-20 sm:pt-10 md:pt-14 lg:pb-24 lg:pt-16"
+      className="relative w-full overflow-hidden bg-white py-16 sm:py-20 md:py-24 lg:py-28"
     >
-      <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
-        {/* ---------- Head ---------- */}
-        <div className="mb-14 flex flex-col justify-between gap-6 border-b border-[rgba(11,29,51,0.14)] pb-10 sm:mb-16 md:mb-20 md:flex-row md:items-end md:gap-10">
-          <div className="max-w-[560px]">
-            <motion.span
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.6 }}
-              custom={0}
-              className="mb-3.5 block text-[11.5px] uppercase tracking-[0.08em] text-[#d98e2b]"
-              style={{ fontFamily: "'JetBrains Mono', monospace" }}
-            >
-              History — 01/01
-            </motion.span>
-            <motion.h2
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.6 }}
-              custom={1}
-              className="mb-3.5 text-[clamp(26px,3.4vw,38px)] font-semibold tracking-[-0.01em]"
-              style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-            >
-              How the group came together.
-            </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.6 }}
-              custom={2}
-              className="text-[15.5px] text-[#1e3a5f]"
-            >
-              Four entries, kept in order.
-            </motion.p>
-          </div>
+      <div
+        className="pointer-events-none absolute -bottom-24 -left-24 h-[380px] w-[380px] rounded-full opacity-[0.06]"
+        style={{
+          background: "radial-gradient(circle, #B8874F, transparent 70%)",
+        }}
+      />
 
-          {/* small legend, reads like a filing key */}
+      <div className="relative mx-auto flex max-w-[1320px] gap-6 px-5 sm:px-8 lg:gap-10">
+        <div className="min-w-0 flex-1">
+          {/* ============ header ============ */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, amount: 0.6 }}
-            custom={3}
-            className="flex shrink-0 items-center gap-2 text-[11px] uppercase tracking-[0.06em] text-[#345d8a]"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+            viewport={{ once: true, amount: 0.4 }}
+            className="mb-8 flex items-start justify-between gap-6 sm:mb-10"
           >
-            <span className="h-1.5 w-1.5 flex-shrink-0 bg-[#d98e2b]" />
-            Sequence verified
-          </motion.div>
-        </div>
-
-        {/* ---------- Ledger ---------- */}
-        <div ref={trackRef} className="relative">
-          {/* base spine */}
-          <div className="absolute bottom-0 left-[3px] top-0 w-px bg-[rgba(11,29,51,0.16)] md:left-[168px] lg:left-[196px]" />
-          {/* scroll-filled spine — the "ink" being written as you read */}
-          <motion.div
-            style={{ scaleY: spineFill, transformOrigin: "top" }}
-            className="absolute bottom-0 left-[3px] top-0 w-px bg-[#d98e2b] md:left-[168px] lg:left-[196px]"
-          />
-
-          <div className="divide-y divide-[rgba(11,29,51,0.12)]">
-            {milestones.map((m, i) => (
-              <motion.div
-                key={i}
-                variants={rowReveal}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.35 }}
-                className="group relative grid grid-cols-1 gap-3 py-8 pl-8 transition-colors duration-300 first:pt-0 hover:bg-[rgba(11,29,51,0.025)] sm:py-9 md:grid-cols-[168px_1fr] md:gap-x-10 md:py-11 md:pl-0 lg:grid-cols-[196px_1fr]"
+            <div>
+              <h2
+                className="mb-2 text-[27px] leading-[1.15] text-[#12203A] sm:text-[34px] md:text-[40px]"
+                style={{ fontFamily: "'Fraunces', Georgia, serif" }}
               >
-                {/* dot marking this record on the spine */}
-                <motion.div
-                  variants={dotReveal}
-                  className="absolute left-0 top-[38px] z-10 h-[7px] w-[7px] -translate-x-1/2 rounded-full bg-[#0b1d33] ring-4 ring-[#eef1f4] transition-colors duration-300 group-hover:bg-[#d98e2b] sm:top-[40px] md:left-[168px] md:top-[46px] lg:left-[196px]"
-                />
+                How the group came together.
+              </h2>
+              <p className="text-[13.5px] text-[#5A7BA6] sm:text-[14.5px]">
+                Four entries, kept in order.
+              </p>
+            </div>
+            <div
+              className="mt-1 hidden shrink-0 items-center gap-2 rounded-md border px-4 py-2 sm:flex"
+              style={{
+                transform: "rotate(-2deg)",
+                borderColor: "rgba(184,135,79,0.35)",
+              }}
+            >
+              <span className="h-1.5 w-1.5 bg-[#B8874F]" />
+              <span
+                className="text-[10px] uppercase tracking-[0.14em] text-[#B8874F]"
+                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                Sequence verified
+              </span>
+            </div>
+          </motion.div>
 
-                {/* ---- label column: record code + big year ---- */}
-                <div className="flex items-baseline gap-3 md:flex-col md:items-start md:gap-1.5 md:pr-8 lg:pr-10">
-                  <span
-                    className="text-[11px] tracking-[0.08em] text-[#345d8a]"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    {m.code}
-                  </span>
-                  <span
-                    className="text-[22px] font-semibold leading-none tracking-[-0.01em] text-[#0b1d33] md:text-[clamp(30px,2.6vw,40px)]"
-                    style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-                  >
-                    {m.year}
-                  </span>
-                </div>
-
-                {/* ---- content column ---- */}
-                <div className="min-w-0">
-                  <span
-                    className="mb-2.5 inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.06em] text-[#d98e2b]"
-                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                  >
-                    <span className="h-1.5 w-1.5 flex-shrink-0 bg-[#d98e2b]" />
-                    {m.tag}
-                  </span>
-                  <h3
-                    className="mb-2 text-[19px] font-semibold leading-snug sm:text-[20px] md:text-[21px]"
-                    style={{ fontFamily: "'Fraunces', Georgia, serif" }}
-                  >
-                    {m.title}
-                  </h3>
-                  <p className="max-w-[52ch] text-[14.5px] leading-relaxed text-[#1e3a5f]">
-                    {m.desc}
-                  </p>
-                </div>
-              </motion.div>
+          {/* ============ timeline ============ */}
+          <div>
+            {TIMELINE.map((item, i) => (
+              <TimelineRow
+                key={item.idx}
+                item={item}
+                isLast={i === TIMELINE.length - 1}
+                revealed={revealedSet.has(item.idx)}
+                rowRef={(el) => (rowRefs.current[i] = el)}
+              />
             ))}
           </div>
         </div>
 
-        {/* ---------- Note ---------- */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.8 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-          className="mt-12 border-t border-[rgba(11,29,51,0.14)] pt-6 text-[13px] italic text-[#345d8a]/80 sm:mt-14"
-        >
-          Note: years and milestones above are placeholders — swap in the
-          group's real founding dates and facts.
-        </motion.p>
+        {/* ============ scroll-spy nav rail ============ */}
+        <div className="sticky top-1/3 hidden shrink-0 flex-col items-center gap-5 self-start pt-24 lg:flex">
+          {TIMELINE.map((item) => (
+            <span
+              key={item.idx}
+              className="h-2 w-2 rounded-full transition-all duration-300"
+              style={{
+                backgroundColor:
+                  activeSpy === item.idx ? item.color : "#B9C2CC",
+                transform: activeSpy === item.idx ? "scale(1.35)" : "scale(1)",
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
