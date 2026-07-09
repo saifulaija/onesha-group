@@ -9,10 +9,10 @@ const navLinks = [
   { href: "#thesis", label: "Thesis" },
   { href: "#market", label: "Market" },
   { href: "#services", label: "Services" },
-  { href: "#model", label: "Model" },
+  { href: "#model", label: "Positioning" },
   { href: "#history", label: "History" },
   { href: "#roadmap", label: "Roadmap" },
-  { href: "#risk", label: "Risk" },
+  { href: "#risks", label: "Risk" },
 ];
 
 const Navbar = () => {

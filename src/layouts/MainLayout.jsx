@@ -2,7 +2,8 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import TopNavbar from "../components/TopNavbar";
 import ScrollToTop from "../components/ScrollToTop";
-import Footer from "../components/Footer";
+
+import Cta from "../components/Cta";
 
 const MainLayout = () => {
   return (
@@ -13,7 +14,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <ScrollToTop />
-      <Footer/>
+      <Cta />
     </>
   );
 };

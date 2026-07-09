@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight } from "lucide-react";
@@ -80,7 +81,7 @@ const SWOT = [
 /* ---------- image stack, left column ---------- */
 const ImageStack = ({ item }) => (
   <div className="relative min-h-[360px] w-full overflow-hidden rounded-2xl sm:min-h-[420px] lg:h-full lg:min-h-0">
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       <motion.div
         key={item.key}
         initial={{ opacity: 0 }}
@@ -123,6 +124,7 @@ const ImageStack = ({ item }) => (
 /* ---------- one accordion row ---------- */
 const QBox = ({ item, isActive, onSelect }) => (
   <div
+    onMouseEnter={onSelect}
     onClick={onSelect}
     role="button"
     tabIndex={0}
@@ -188,7 +190,7 @@ const Positioning = () => {
 
   return (
     <section
-      id="positioning"
+      id="model"
       className="relative overflow-hidden py-16 sm:py-20 md:py-24 lg:py-28"
       style={{ backgroundColor: "#0B1D33" }}
     >

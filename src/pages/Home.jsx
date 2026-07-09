@@ -4,12 +4,14 @@ import Market from "../components/Market";
 import Positioning from "../components/Positioning";
 import Economics from "../components/Economics";
 import Execution from "../components/Execution";
-import Risks from "../components/Risks";
-import Infrastructure from "../components/Infrastructure";
+
 import History from "../components/History";
 import Services from "../components/Services";
 import About from "../components/About";
 import Respective from "../components/Respective";
+import Know from "../components/Know";
+import FootprintMap from "../components/FootprintMap";
+
 
 const Home = () => {
   return (
@@ -24,8 +26,11 @@ const Home = () => {
       <History />
       <Economics />
       <Execution />
-      <Risks />
-      <Infrastructure />
+      <Know/>
+     <FootprintMap/>
+    
+     
+      
     </>
   );
 };
