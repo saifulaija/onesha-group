@@ -9,6 +9,7 @@ import Infrastructure from "../components/Infrastructure";
 import History from "../components/History";
 import Services from "../components/Services";
 import About from "../components/About";
+import Respective from "../components/Respective";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <About/>
       <Thesis />
       <Market />
+      <Respective/>
       <Services/>
       <Positioning />
       <History />
