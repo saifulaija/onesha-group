@@ -214,25 +214,109 @@ const Map = () => {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto max-w-[980px] overflow-hidden rounded-2xl border border-[#12203A]/[0.08] bg-white shadow-[0_40px_80px_-30px_rgba(18,32,58,0.35)]"
         >
-          {/* chrome bar */}
-          <div className="flex items-center justify-between border-b border-[#12203A]/[0.08] px-4 py-3 sm:px-6 sm:py-4">
-            <div className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#12203A] text-[11px] font-semibold text-white sm:h-7 sm:w-7">
+          {/* chrome bar — premium glass browser window, no fake nav */}
+          <div
+            className="relative flex items-center gap-5 border-b border-[#12203A]/[0.06] px-5 py-3.5 sm:px-6 sm:py-4"
+            style={{
+              background: "linear-gradient(180deg, #FCFBF9 0%, #F5F2ED 100%)",
+            }}
+          >
+            {/* hairline gold accent along the very top */}
+            <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[#B8874F]/50 to-transparent" />
+
+            {/* traffic lights */}
+            <div className="flex flex-shrink-0 items-center gap-[8px]">
+              <span
+                className="h-[10px] w-[10px] rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle at 30% 30%, #FF8A80, #E8483B)",
+                  boxShadow: "inset 0 0 0 0.5px rgba(0,0,0,0.08)",
+                }}
+              />
+              <span
+                className="h-[10px] w-[10px] rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle at 30% 30%, #FFD666, #DB9E10)",
+                  boxShadow: "inset 0 0 0 0.5px rgba(0,0,0,0.08)",
+                }}
+              />
+              <span
+                className="h-[10px] w-[10px] rounded-full"
+                style={{
+                  background:
+                    "radial-gradient(circle at 30% 30%, #6FE58B, #1FA84C)",
+                  boxShadow: "inset 0 0 0 0.5px rgba(0,0,0,0.08)",
+                }}
+              />
+            </div>
+
+            {/* url pill — center, refined glass finish with gold-lit focus ring */}
+            <div className="flex min-w-0 flex-1 items-center justify-center">
+              <div
+                className="group flex w-full max-w-[380px] items-center gap-2.5 rounded-full border border-[#12203A]/[0.07] bg-white/80 px-4 py-[7px] backdrop-blur-sm transition-shadow duration-300"
+                style={{
+                  boxShadow:
+                    "0 1px 2px rgba(18,32,58,0.04), 0 0 0 1px rgba(184,135,79,0.06), inset 0 1px 0 rgba(255,255,255,0.9)",
+                }}
+              >
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="flex-shrink-0 opacity-70"
+                >
+                  <path
+                    d="M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20M12 2c2.5 2.7 4 6.3 4 10s-1.5 7.3-4 10c-2.5-2.7-4-6.3-4-10s1.5-7.3 4-10z"
+                    stroke="#7A8BA5"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+                <span
+                  className="truncate text-[11.5px] tracking-[0.01em] text-[#4A5875]"
+                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                >
+                  oneshagroup.com
+                </span>
+                <span className="ml-auto flex flex-shrink-0 items-center gap-1 rounded-full bg-[#B8874F]/[0.08] px-2 py-[3px]">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M12 15a4 4 0 004-4V7a4 4 0 00-8 0v4a4 4 0 004 4zM6 11v2a6 6 0 0012 0v-2"
+                      stroke="#B8874F"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span
+                    className="text-[9px] font-medium uppercase tracking-[0.08em] text-[#B8874F]"
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  >
+                    Secure
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            {/* brand mark — right, quiet and precise */}
+            <div className="flex flex-shrink-0 items-center gap-2.5">
+              <span
+                className="flex h-7 w-7 items-center justify-center rounded-lg text-[11.5px] font-semibold text-white"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #1A2E4D 0%, #0D1930 100%)",
+                  boxShadow: "0 2px 6px rgba(18,32,58,0.25)",
+                }}
+              >
                 O
               </span>
               <span
-                className="text-[13px] font-medium text-[#12203A] sm:text-[14px]"
+                className="hidden text-[13.5px] tracking-[0.01em] text-[#12203A] sm:inline"
                 style={{ fontFamily: "'Fraunces', Georgia, serif" }}
               >
                 Onesha Group
               </span>
-            </div>
-            <div className="hidden items-center gap-5 text-[12px] text-[#5A6B85] sm:flex">
-              <span>Home</span>
-              <span>About</span>
-              <span>Insights</span>
-              <span>Careers</span>
-              <span>Contact</span>
             </div>
           </div>
 

@@ -17,20 +17,17 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <About/>
+      <About />
       <Thesis />
       <Market />
-      <Respective/>
-      <Services/>
+      <Respective />
+      <Services />
       <Positioning />
       <History />
       <Economics />
       <Execution />
-      <Know/>
-     <FootprintMap/>
-    
-     
-      
+      <Know />
+      <FootprintMap />
     </>
   );
 };
