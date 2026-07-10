@@ -1,16 +1,46 @@
-# React + Vite
+# Onesha Group
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live site:** [onesha-group.vercel.app](https://onesha-group.vercel.app/)
 
-Currently, two official plugins are available:
+Marketing website for Onesha Group, a Japan-to-Bangladesh export holding company operating across four verticals: **Motors**, **Tech**, **Textile**, and **Leather**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack
 
-## React Compiler
+- **React** — component architecture
+- **Tailwind CSS** — utility-first styling
+- **Framer Motion** — scroll-triggered animation (fade-up, staggered grids, card reveals)
+- **Lucide React** — icon set
+- Deployed on **Vercel**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Design system
 
-## Expanding the ESLint configuration
+- **Colors**
+  - Navy `#0B1B2B` / `#12203A` — primary dark surfaces and text
+  - Gold `#B8874F` — accent, CTAs, highlights
+  - Supporting tints: `#f2c879` (light gold), `#5A7BA6` (steel blue), `#9db8e0` (pale blue)
+- **Typography**
+  - `Fraunces` (serif) — headings
+  - Default sans — body copy
+  - `JetBrains Mono` — eyebrows, tags, labels, mono data
+- **Motion pattern** — consistent `fadeUp` / staggered-grid variants reused across sections for scroll-in reveals
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Sections / components
+
+| Component | Purpose |
+|---|---|
+| `Hero` | Landing slider / intro |
+| `About` | Company overview |
+| `Market` | Market thesis — why textiles, why now (comparison cards, forecast chart, segment donut chart, route map) |
+| `Global Perspective` | Cross-border positioning |
+| `Thesis` | Strategic argument |
+| `Services` | Service / vertical breakdown |
+| `Cta` | Closing call-to-action + site footer (shared across pages) |
+
+## Notes for contributors
+
+- Anchor links inside `Cta`/footer (e.g. `#thesis`, `#roadmap`) point to sections on the **home page**. When this component is reused on other pages, links are routed as `/#section-id` so navigation works from anywhere on the site, not just the homepage.
+- Keep new sections consistent with the existing navy/gold system and the shared `fadeUp` motion variant for visual continuity.
+
+## Status
+
+Working draft — actively under design and content iteration (July 2026).
