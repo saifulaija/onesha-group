@@ -287,7 +287,7 @@ const History = () => {
             <div
               className="mt-1 hidden shrink-0 items-center gap-2 rounded-md border px-4 py-2 sm:flex"
               style={{
-                transform: "rotate(-2deg)",
+                transform: "rotate(0deg)",
                 borderColor: "rgba(184,135,79,0.35)",
               }}
             >
